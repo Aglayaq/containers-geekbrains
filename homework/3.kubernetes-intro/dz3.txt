@@ -1,5 +1,4 @@
-
-comm.txt
+Список команд - comm.txt
 
 -----------------------------
 vi deployment.yaml
@@ -14,9 +13,8 @@ kubectl rollout undo deployment/fact-deployment
 kubectl get pods
 kubectl get replicaset
 kubectl describe pod
-------------------------------
-
-deployment.yaml
+-----------------------------
+Применяем deployment.yaml
 
 --- 
 
