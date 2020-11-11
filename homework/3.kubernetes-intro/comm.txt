@@ -1,0 +1,12 @@
+vi deployment.yaml
+kubectl apply -f deployment.yaml
+kubectl get pods
+kubectl get replicaset
+kubectl set image deployment fact-deployment 'factorio=factoriotools/factorio:latest'
+kubectl get pods
+kubectl get replicaset
+kubectl describe pod
+kubectl rollout undo deployment/fact-deployment
+kubectl get pods
+kubectl get replicaset
+kubectl describe pod
