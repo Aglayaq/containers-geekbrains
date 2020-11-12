@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: red-depl
+spec:
+replicas: 1
+selector:
+matchLabels:
+app: red-depl
+strategy:
+rollingUpdate:
+maxSurge: 0
+maxUnavailable: 1
+type: RollingUpdate
+template:
+metadata:
+labels:
+app: red-depl
+spec:
+containers:
+- image: redmine:4.1.1
+name: redmine
+env:
+- name: REDMINE_DB_POSTGRES
+value: database
+- name: REDMINE_DB_USERNAME
+value: testuser
+- name: REDMINE_DB_DATABASE
+value: testdatabase
+- name: REDMINE_DB_PASSWORD
+valueFrom:
+secretKeyRef:
+name: my-secret---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: red-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: red-depl
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: red-depl
+    spec:
+      containers:        
+        - image: redmine:4.1.1
+        name: redmine
+        env:
+        - name: REDMINE_DB_POSTGRES 
+          value: database
+        - name: REDMINE_DB_USERNAME
+          value: testuser
+        - name: REDMINE_DB_DATABASE
+          value: testdatabase
+        - name: REDMINE_DB_PASSWORD 
+          valueFrom:
+           secretKeyRef:
+            name: my-secret
+            key: db-pass
+        - name: REDMINE_SECRET_KEY_BASE
+          valueFrom:
+           secretKeyRef:
+            name: supersecretkey
+            key: red-pass
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+key: db-pass
+- name: REDMINE_SECRET_KEY_BASE
+valueFrom:
+secretKeyRef:
+name: supersecretkey
