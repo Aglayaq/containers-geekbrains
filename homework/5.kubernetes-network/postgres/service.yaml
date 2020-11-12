@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-name: database
+  name: database
 spec:
-ports:
-- port: 5432
-targetPort: 5432
-selector:
-app: post-depl
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: post_depl
